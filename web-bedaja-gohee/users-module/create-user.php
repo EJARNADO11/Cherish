@@ -3,12 +3,30 @@
     header("location: index.php?page=settings&subpage=users");
  }
 ?>
+<script>
+ function validateForm() {
 
+  var confirmpasswordInput = document.getElementById("confirmpassword");
+  var passwordInput = document.getElementById("password");
+ // Perform password validation
+    var password = passwordInput.value;
+    var confirmpassword = confirmpasswordInput.value; 
+    if (password.length < 8) {
+      alert("Password must be at least 8 characters long");
+      return false;
+    }
+    if(password != confirmpassword){
+        alert("Password does not match!");
+        return false;
+    }
+    return true;
+ }
+</script> 
 <div class="header">
    <h3>Create New User</h3>
 </div>
 <div id="form-block">
-<form method="POST" action="processes/process.user.php?action=new">
+<form method="POST" id="userform" onsubmit="return validateForm(event)" action="processes/process.user.php?action=new">
         <div id="form-block-half">
             <label for="fname">First Name</label>
             <input type="text" id="fname" class="input" name="firstname" placeholder="Your name..">
